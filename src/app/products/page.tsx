@@ -45,11 +45,6 @@ export default function ProductsPage() {
         )
     }
 
-    console.log('Current filter:', filter)
-    console.log('Favorites:', favorites)
-    console.log('All products:', products.length)
-    console.log('Filtered products:', filteredProducts.length)
-
     return (
         <div className={styles.page}>
             <h1 className={styles.title}>Товары</h1>

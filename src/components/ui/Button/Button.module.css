@@ -42,16 +42,23 @@
 }
 
 .text {
-    padding: 0.75rem, 1.25rem;
+    padding: 0.5rem 1rem;
     font-size: 1rem;
+    border-radius: 1.25rem;
 }
 
 .both {
-    padding: 0.75rem, 1.25rem, 0.75rem, 0.75rem;
+    padding: 0.5rem 0.75rem 0.5rem 0.75rem;
     font-size: 1rem;
+    border-radius: 1.25rem;
 }
 
 .button svg {
     width: 1.25rem;
     height: 1.25rem;
+}
+
+.filterButton {
+    min-width: 8rem;
+    justify-content: center;
 }

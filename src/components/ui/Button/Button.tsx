@@ -8,6 +8,7 @@ interface ButtonProps {
     mode?: 'icon' | 'text' | 'both'
     type?: 'button' | 'submit' | 'reset'
     disabled?: boolean
+    className?: string
 }
 
 export const Button: React.FC<ButtonProps> = ({

@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setFilter } from '@/lib/store'
 import { RootState } from '@/lib/store'
+import { Button } from '@/components/ui/Button/Button'
 import styles from './ProductFilter.module.css'
 
 export const ProductFilter: React.FC = () => {
@@ -15,23 +16,23 @@ export const ProductFilter: React.FC = () => {
 
     return (
         <div className={styles.filter}>
-            <button
-                className={`${styles.filterButton} ${
-                    currentFilter === 'all' ? styles.active : ''
-                }`}
+            <Button
+                variant={currentFilter === 'all' ? 'liked' : 'init'}
+                mode="text"
+                className={styles.filterButton}
                 onClick={() => dispatch(setFilter('all'))}
             >
                 Все товары
-            </button>
+            </Button>
 
-            <button
-                className={`${styles.filterButton} ${
-                    currentFilter === 'favorites' ? styles.active : ''
-                }`}
+            <Button
+                variant={currentFilter === 'favorites' ? 'liked' : 'init'}
+                mode="text"
                 onClick={() => dispatch(setFilter('favorites'))}
+                className={styles.filterButton}
             >
                 Избранное ({favoritesCount})
-            </button>
+            </Button>
         </div>
     )
 }

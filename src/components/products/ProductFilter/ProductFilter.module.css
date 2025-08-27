@@ -1,31 +1,4 @@
 .filter {
     display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    padding: 1rem;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.filterButton {
-    padding: 0.75rem 1.5rem;
-    border: 2px solid #e5e7eb;
-    border-radius: 8px;
-    background: white;
-    color: #374151;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.filterButton:hover {
-    border-color: #2563eb;
-    color: #2563eb;
-}
-
-.filterButton.active {
-    background: #2563eb;
-    color: white;
-    border-color: #2563eb;
+    margin-bottom: 1rem;
 }
