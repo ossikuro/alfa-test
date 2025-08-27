@@ -1,0 +1,104 @@
+.page {
+    padding: 2rem;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 3rem;
+    padding: 2rem;
+}
+
+.productContent {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+}
+
+.navigation {
+    display: flex;
+}
+
+.imageSection {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 2rem;
+}
+
+.image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    object-fit: contain;
+}
+
+.infoSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.titleBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.8);
+    margin: 0;
+}
+
+.price {
+    font-size: 2rem;
+    font-weight: 900;
+    color: rgba(0, 0, 0, 1);
+    margin-top: 3rem;
+}
+
+.category {
+    font-size: 1.1rem;
+    color: #666;
+    text-transform: capitalize;
+}
+
+.description {
+    padding: 1rem 0;
+    border: 0.03rem solid rgba(0, 0, 0, 0.16);
+    border-width: 0.03rem 0 0.03rem 0;
+}
+
+.description p {
+    line-height: 1.6;
+    color: rgba(0, 0, 0, 0.64);
+    margin: 0;
+}
+
+.rating {
+    display: flex;
+    gap: 2rem;
+    font-size: 1.1rem;
+    color: rgba(0, 0, 0, 0.64);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .productContent {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 1.5rem;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .price {
+        font-size: 1.4rem;
+    }
+}
