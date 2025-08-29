@@ -44,7 +44,7 @@ export default function ProductPage() {
                         onClick={() => router.push('/products')}
                     >
                         <BackIcon />
-                        Вернуться к товарам
+                        Back
                     </Button>
                     <h1 className={styles.title}>Товар не найден</h1>
                 </div>
@@ -62,10 +62,9 @@ export default function ProductPage() {
                         onClick={() => router.push('/products')}
                     >
                         <BackIcon />
-                        Назад
+                        Back
                     </Button>
 
-                    {/* Добавляем кнопки действий */}
                     <div className={styles.actions}>
                         <Button
                             variant={product.isLiked ? 'liked' : 'init'}

@@ -12,9 +12,16 @@
     font-weight: bold;
 }
 
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .filters {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 .productsGrid {

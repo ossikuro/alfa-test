@@ -29,15 +29,10 @@ export const Select: React.FC<SelectProps> = ({
         <div className={styles.selectContainer}>
             <select
                 value={value}
-                onChange={handleChange} // Важно: должно быть onChange
+                onChange={handleChange}
                 className={styles.select}
                 disabled={disabled}
             >
-                {placeholder && (
-                    <option value="" disabled>
-                        {placeholder}
-                    </option>
-                )}
                 {options.map((option) => (
                     <option key={option.value} value={option.value}>
                         {option.label}

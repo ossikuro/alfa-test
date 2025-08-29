@@ -4,11 +4,11 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/navigation'
 import { addProduct } from '@/lib/store'
-import { RootState } from '@/lib/store'
 import { Button } from '@/components/ui/Button/Button'
 import { Input } from '@/components/ui/Input/Input'
 import { Select } from '@/components/ui/Select/Select'
-import styles from './createProduct.module.css'
+import styles from './newProduct.module.css'
+import BackIcon from '@/assets/arrow_back.svg'
 
 interface ProductForm {
     title: string
@@ -23,11 +23,6 @@ export default function CreateProductPage() {
     const dispatch = useDispatch()
     const router = useRouter()
 
-    // Берем категории из Redux store
-    const categories = useSelector(
-        (state: RootState) => state.products.categories
-    )
-
     const [formData, setFormData] = useState<ProductForm>({
         title: '',
         description: '',
@@ -41,16 +36,7 @@ export default function CreateProductPage() {
         Partial<Omit<ProductForm, 'image'>> & { image?: string }
     >({})
 
-    // Преобразуем категории в options для Select
-    const categoryOptions = [
-        { value: '', label: 'Выберите категорию' },
-        ...categories.map((category) => ({
-            value: category,
-            label: category.charAt(0).toUpperCase() + category.slice(1),
-        })),
-    ]
-
-    // Загрузка изображения
+    // Image upload
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
         if (file) {
@@ -60,37 +46,46 @@ export default function CreateProductPage() {
                 imagePreview: URL.createObjectURL(file),
             }))
 
-            // Убираем ошибку изображения если была
+            // Clean error
             if (errors.image) {
                 setErrors((prev) => ({ ...prev, image: undefined }))
             }
         }
     }
 
-    // Обновление текстовых полей
+    // Refresh text fields
     const handleInputChange = (
         field: keyof Omit<ProductForm, 'image'>,
         value: string
     ) => {
         setFormData((prev) => ({ ...prev, [field]: value }))
 
-        // Убираем ошибку при изменении поля
+        // УClean up error if the field has changed
         if (errors[field]) {
             setErrors((prev) => ({ ...prev, [field]: undefined }))
         }
     }
 
-    // Обновление категории
+    // Categories
+    const categoryOptions = [
+        { value: '', label: '' },
+        { value: 'electronics', label: 'Electronics' },
+        { value: 'jewelery', label: 'Jewelery' },
+        { value: "men's clothing", label: "Men's Clothing" },
+        { value: "women's clothing", label: "Women's Clothing" },
+    ]
+
+    // Refresh category
     const handleCategoryChange = (value: string) => {
         setFormData((prev) => ({ ...prev, category: value }))
 
-        // Убираем ошибку категории если была
+        // Clean up error if category has been refreshed
         if (errors.category) {
             setErrors((prev) => ({ ...prev, category: undefined }))
         }
     }
 
-    // Валидация формы
+    // Form validation
     const validateForm = (): boolean => {
         const newErrors: Partial<Omit<ProductForm, 'image'>> & {
             image?: string
@@ -124,12 +119,12 @@ export default function CreateProductPage() {
         return Object.keys(newErrors).length === 0
     }
 
-    // Обработчик отправки формы
+    // Send form
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
 
         if (validateForm() && formData.image) {
-            // Создаем временный URL для загруженного файла
+            // tempoparry URL
             const imageUrl = URL.createObjectURL(formData.image)
 
             const newProduct = {
@@ -151,15 +146,15 @@ export default function CreateProductPage() {
     return (
         <div className={styles.page}>
             <div className={styles.container}>
-                <div className={styles.header}>
+                <div className={styles.navigation}>
                     <Button
                         variant="init"
-                        mode="text"
+                        mode="both"
                         onClick={() => router.push('/products')}
                     >
-                        ← Назад к товарам
+                        <BackIcon />
+                        Back
                     </Button>
-                    <h1 className={styles.title}>Создать новый товар</h1>
                 </div>
 
                 <form onSubmit={handleSubmit} className={styles.form}>
@@ -193,58 +188,57 @@ export default function CreateProductPage() {
                         </div>
 
                         <div className={styles.infoSection}>
+                            <h1 className={styles.title}>Add new item</h1>
                             <Input
                                 value={formData.title}
                                 onChange={(value) =>
                                     handleInputChange('title', value)
                                 }
-                                placeholder="Название товара"
-                                label="Название"
+                                placeholder="Add a name"
+                                label="Name"
                                 required={true}
                                 error={errors.title}
                             />
+
+                            <div className={styles.formElementContainer}>
+                                <p className={styles.labelSelect}>Category</p>
+                                <Select
+                                    value={formData.category}
+                                    onChange={handleCategoryChange}
+                                    options={categoryOptions}
+                                    placeholder="--"
+                                />
+                                {errors.category && (
+                                    <p className={styles.errorText}>
+                                        {errors.category}
+                                    </p>
+                                )}
+                            </div>
 
                             <Input
                                 value={formData.description}
                                 onChange={(value) =>
                                     handleInputChange('description', value)
                                 }
-                                placeholder="Описание товара"
-                                label="Описание"
+                                placeholder="Add description"
+                                label="Description"
                                 multiline={true}
                                 rows={4}
                                 required={true}
                                 error={errors.description}
                             />
 
-                            <div className={styles.row}>
-                                <div className={styles.col}>
-                                    <Input
-                                        value={formData.price}
-                                        onChange={(value) =>
-                                            handleInputChange('price', value)
-                                        }
-                                        placeholder="0.00"
-                                        label="Цена ($)"
-                                        type="number"
-                                        required={true}
-                                        error={errors.price}
-                                    />
-                                </div>
-                                <div className={styles.col}>
-                                    <Select
-                                        value={formData.category}
-                                        onChange={handleCategoryChange}
-                                        options={categoryOptions}
-                                        placeholder="Выберите категорию"
-                                    />
-                                    {errors.category && (
-                                        <p className={styles.errorText}>
-                                            {errors.category}
-                                        </p>
-                                    )}
-                                </div>
-                            </div>
+                            <Input
+                                value={formData.price}
+                                onChange={(value) =>
+                                    handleInputChange('price', value)
+                                }
+                                placeholder="0.00"
+                                label="Price"
+                                type="number"
+                                required={true}
+                                error={errors.price}
+                            />
 
                             <Button
                                 type="submit"
@@ -252,7 +246,7 @@ export default function CreateProductPage() {
                                 mode="text"
                                 className={styles.submitButton}
                             >
-                                Создать товар
+                                Save
                             </Button>
                         </div>
                     </div>

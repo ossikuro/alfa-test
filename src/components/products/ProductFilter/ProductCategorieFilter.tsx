@@ -9,7 +9,7 @@ import styles from './ProductCategorieFilter.module.css'
 export const ProductCategorySelect: React.FC = () => {
     const dispatch = useDispatch()
     const currentCategory = useSelector(
-        (state: RootState) => state.products.categoryFilter
+        (state: RootState) => state.products.categoryFilter || 'all'
     )
     const categories = useSelector(
         (state: RootState) => state.products.categories
@@ -41,7 +41,6 @@ export const ProductCategorySelect: React.FC = () => {
                 value={currentCategory}
                 onChange={handleCategoryChange}
                 options={options}
-                placeholder="All goodies"
             />
         </div>
     )

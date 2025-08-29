@@ -7,6 +7,7 @@ import { setProducts, Product } from '@/lib/store'
 import { fetchProducts } from '@/lib/api'
 import { ProductFilter } from '@/components/products/ProductFilter/ProductFilter'
 import { ProductCategorySelect } from '@/components/products/ProductFilter/ProductCategorieFilter'
+import { Button } from '@/components/ui/Button/Button'
 import { ProductCard } from '@/components/products/ProductCard/ProductCard'
 import styles from './products.module.css'
 
@@ -58,9 +59,19 @@ export default function ProductsPage() {
     return (
         <div className={styles.page}>
             <h1 className={styles.title}>Goodies</h1>
-            <div className={styles.filters}>
-                <ProductFilter />
-                <ProductCategorySelect />
+            <div className={styles.controls}>
+                <div className={styles.filters} >
+                    <ProductFilter />
+                    <ProductCategorySelect />
+                </div>
+                <Button
+                    variant="init"
+                    mode="text"
+                    onClick={() => router.push('/products/newProduct')}
+                    className={styles.addButton}
+                >
+                    + Add New
+                </Button>
             </div>
 
             <div

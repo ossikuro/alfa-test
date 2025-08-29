@@ -1,31 +1,30 @@
 .page {
     padding: 2rem;
-    min-height: 100vh;
-    background-color: #f8f9fa;
 }
 
 .container {
-    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
     margin: 0 auto;
-    background: white;
-    border-radius: 16px;
+    gap: 3rem;
     padding: 2rem;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
-.header {
+.navigation {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 1rem;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
 }
 
 .title {
     font-size: 2rem;
+    line-height: 2.5rem;
     font-weight: 700;
-    color: #333;
+    color: rgba(0, 0, 0, 0.8);
     margin: 0;
 }
 
@@ -41,21 +40,25 @@
     gap: 1rem;
 }
 
+.fileInput {
+    display: none;
+}
+
 .imagePlaceholder {
-    width: 100%;
-    height: 300px;
-    border: 2px dashed #e5e7eb;
-    border-radius: 12px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    height: 16rem;
+    border: 1px dashed rgba(0, 0, 0, 0.16);
     cursor: pointer;
     transition: border-color 0.2s ease;
     overflow: hidden;
 }
 
 .imagePlaceholder:hover {
-    border-color: #2563eb;
+    border-color: rgb(37, 99, 235);
 }
 
 .imageUpload {
@@ -76,30 +79,35 @@
     object-fit: cover;
 }
 
+.imagePlaceholder:has(.imagePreview) .fileInput {
+    display: none;
+}
+
 .infoSection {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-}
-
-.row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 1rem;
 }
 
-.col {
+.formElementContainer {
     display: flex;
     flex-direction: column;
 }
 
+.labelSelect {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.64);
+}
+
 .errorText {
-    color: #ef4444;
+    color: rgb(218, 10, 42, 1);
     font-size: 0.875rem;
-    margin-top: 0.5rem;
 }
 
 .submitButton {
+    height: 3rem;
     margin-top: 1rem;
     align-self: flex-start;
 }
