@@ -14,13 +14,18 @@
 
 .controls {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .filters {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    width: 100%;
     gap: 0.5rem;
 }
 
@@ -52,9 +57,14 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .filters {
+    .controls {
         flex-direction: row;
         justify-content: space-between;
+    }
+
+    .filters {
+        flex-direction: row;
+        justify-content: flex-start;
     }
 }
 
