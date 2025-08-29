@@ -19,6 +19,8 @@ export interface ProductsState {
     items: Product[]
     favorites: number[]
     filter: 'all' | 'favorites'
+    categoryFilter: string
+    categories: string[]
 }
 
 // Initial state of the storage
@@ -26,6 +28,8 @@ const initialState: ProductsState = {
     items: [],
     favorites: [],
     filter: 'all',
+    categoryFilter: 'all',
+    categories: [],
 }
 
 // Slice of the Products (no need to create separate file, we have just one slice)
@@ -63,11 +67,29 @@ const productsSlice = createSlice({
         setFilter: (state, action: PayloadAction<'all' | 'favorites'>) => {
             state.filter = action.payload
         },
+        setCategoryFilter: (state, action: PayloadAction<string>) => {
+            console.log('🎯 Reducer: setting category to', action.payload)
+            state.categoryFilter = action.payload
+        },
+        setCategories: (state, action: PayloadAction<string[]>) => {
+            state.categories = action.payload
+        },
+
+        addProduct: (state, action: PayloadAction<Product>) => {
+            state.items.unshift(action.payload)
+        },
     },
 })
 
-export const { setProducts, toggleLike, deleteProduct, setFilter } =
-    productsSlice.actions
+export const {
+    setProducts,
+    toggleLike,
+    deleteProduct,
+    setFilter,
+    setCategoryFilter,
+    setCategories,
+    addProduct,
+} = productsSlice.actions
 
 export const store = configureStore({
     reducer: {

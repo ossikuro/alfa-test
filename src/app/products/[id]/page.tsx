@@ -2,33 +2,52 @@
 
 import React from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux' // Добавляем useDispatch
 import { RootState } from '@/lib/store'
+import { toggleLike, deleteProduct } from '@/lib/store' // Добавляем actions
 import { Button } from '@/components/ui/Button/Button'
 import styles from './productPage.module.css'
 import BackIcon from '@/assets/arrow_back.svg'
+import LikeIcon from '@/assets/favorites.svg' // Иконка лайка
+import DeleteIcon from '@/assets/delete.svg' // Иконка удаления
 
 export default function ProductPage() {
     const params = useParams()
     const router = useRouter()
+    const dispatch = useDispatch() // Добавляем dispatch
     const productId = Number(params.id)
 
     const product = useSelector((state: RootState) =>
         state.products.items.find((item) => item.id === productId)
     )
 
+    const handleLikeClick = () => {
+        if (product) {
+            dispatch(toggleLike(product.id))
+        }
+    }
+
+    const handleDeleteClick = () => {
+        if (product) {
+            dispatch(deleteProduct(product.id))
+            router.push('/products') // Перенаправляем после удаления
+        }
+    }
+
     if (!product) {
         return (
             <div className={styles.page}>
-                <h1>Товар не найден</h1>
-                <Button
-                    variant="init"
-                    mode="both"
-                    onClick={() => router.push('/products')}
-                >
-                    <BackIcon />
-                    Вернуться к товарам
-                </Button>
+                <div className={styles.container}>
+                    <Button
+                        variant="init"
+                        mode="both"
+                        onClick={() => router.push('/products')}
+                    >
+                        <BackIcon />
+                        Вернуться к товарам
+                    </Button>
+                    <h1 className={styles.title}>Товар не найден</h1>
+                </div>
             </div>
         )
     }
@@ -45,6 +64,25 @@ export default function ProductPage() {
                         <BackIcon />
                         Назад
                     </Button>
+
+                    {/* Добавляем кнопки действий */}
+                    <div className={styles.actions}>
+                        <Button
+                            variant={product.isLiked ? 'liked' : 'init'}
+                            mode="icon"
+                            onClick={handleLikeClick}
+                        >
+                            <LikeIcon />
+                        </Button>
+
+                        <Button
+                            variant="init"
+                            mode="icon"
+                            onClick={handleDeleteClick}
+                        >
+                            <DeleteIcon />
+                        </Button>
+                    </div>
                 </div>
 
                 <div className={styles.productContent}>

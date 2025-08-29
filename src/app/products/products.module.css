@@ -12,6 +12,11 @@
     font-weight: bold;
 }
 
+.filters {
+    display: flex;
+    flex-direction: column;
+}
+
 .productsGrid {
     display: grid;
     box-sizing: border-box;
@@ -38,6 +43,11 @@
 @media (min-width: 640px) {
     .productsGrid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .filters {
+        flex-direction: row;
+        justify-content: space-between;
     }
 }
 

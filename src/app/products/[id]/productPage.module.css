@@ -21,6 +21,20 @@
     display: flex;
 }
 
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
 .imageSection {
     display: flex;
     align-items: flex-start;
@@ -49,6 +63,7 @@
 
 .title {
     font-size: 2rem;
+    line-height: 2.5rem;
     font-weight: 700;
     color: rgba(0, 0, 0, 0.8);
     margin: 0;

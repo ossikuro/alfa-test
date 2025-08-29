@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { setProducts, Product } from '@/lib/store'
 import { fetchProducts } from '@/lib/api'
 import { ProductFilter } from '@/components/products/ProductFilter/ProductFilter'
+import { ProductCategorySelect } from '@/components/products/ProductFilter/ProductCategorieFilter'
 import { ProductCard } from '@/components/products/ProductCard/ProductCard'
 import styles from './products.module.css'
 
@@ -14,23 +15,32 @@ export default function ProductsPage() {
     const products = useSelector((state: any) => state.products.items)
     const filter = useSelector((state: any) => state.products.filter)
     const favorites = useSelector((state: any) => state.products.favorites)
+    const categoryFilter = useSelector(
+        (state: any) => state.products.categoryFilter
+    )
     const router = useRouter()
 
     useEffect(() => {
-        const loadProducts = async () => {
-            const productsData = await fetchProducts()
-            dispatch(setProducts(productsData))
+        if (products.length === 0) {
+            const loadProducts = async () => {
+                const productsData = await fetchProducts()
+                dispatch(setProducts(productsData))
+            }
+            loadProducts()
         }
+    }, [dispatch, products.length])
 
-        loadProducts()
-    }, [dispatch])
+    const filteredProducts = products.filter((product: Product) => {
+        const matchesFavorites =
+            filter === 'favorites' ? favorites.includes(product.id) : true
 
-    const filteredProducts =
-        filter === 'favorites'
-            ? products.filter((product: Product) =>
-                  favorites.includes(product.id)
-              )
-            : products
+        const matchesCategory =
+            categoryFilter === 'all'
+                ? true
+                : product.category === categoryFilter
+
+        return matchesFavorites && matchesCategory
+    })
 
     const handleCardClick = (id: number) => {
         router.push(`/products/${id}`)
@@ -39,18 +49,24 @@ export default function ProductsPage() {
     if (products.length === 0) {
         return (
             <div className={styles.page}>
-                <h1 className={styles.title}>Товары</h1>
-                <p className={styles.loading}>Загружаем товары...</p>
+                <h1 className={styles.title}>Goodies</h1>
+                <p className={styles.loading}>Uploading catalogue...</p>
             </div>
         )
     }
 
     return (
         <div className={styles.page}>
-            <h1 className={styles.title}>Товары</h1>
-            <ProductFilter />
+            <h1 className={styles.title}>Goodies</h1>
+            <div className={styles.filters}>
+                <ProductFilter />
+                <ProductCategorySelect />
+            </div>
 
-            <div className={styles.productsGrid} key={filter}>
+            <div
+                className={styles.productsGrid}
+                key={`${filter}-${categoryFilter}`}
+            >
                 {filteredProducts.map((product: Product) => (
                     <ProductCard
                         key={product.id}
@@ -61,7 +77,7 @@ export default function ProductsPage() {
             </div>
 
             {filter === 'favorites' && filteredProducts.length === 0 && (
-                <p className={styles.emptyMessage}>Нет избранных товаров</p>
+                <p className={styles.emptyMessage}>There is no favorites</p>
             )}
         </div>
     )

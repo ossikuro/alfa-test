@@ -1,0 +1,47 @@
+.inputContainer {
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.64);
+}
+
+.required {
+    color: rgb(218, 10, 42, 1);
+    margin-left: 0.25rem;
+}
+
+.input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s ease;
+    box-sizing: border-box;
+}
+
+.input:focus {
+    outline: none;
+    border-color: rgb(37, 99, 235);
+}
+
+.textarea {
+    resize: vertical;
+    min-height: 3rem;
+}
+
+.error {
+    border-color: rgb(218, 10, 42, 1);
+}
+
+.errorText {
+    color: rgb(218, 10, 42, 1);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}

@@ -85,3 +85,14 @@ export const fetchProduct = async (id: number): Promise<Product | null> => {
         return null
     }
 }
+
+export const fetchCategories = async (): Promise<string[]> => {
+    try {
+        const response = await fetch(`${API_URL}/products/categories`)
+        if (!response.ok) throw new Error('Failed to fetch categories')
+        return await response.json()
+    } catch (error) {
+        console.error('Error fetching categories:', error)
+        return ['electronics', 'jewelery', "men's clothing", "women's clothing"]
+    }
+}
