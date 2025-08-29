@@ -22,16 +22,26 @@ API: [fakestoreapi.com](https://fakestoreapi.com/), требует VPN
 
 ## 🏗️ Архитектура
 src/
-├── app/                    - Next.js App Router
-│   ├── products/          - Страницы продуктов
-│   └── page.tsx           - Главная страница
-├── components/            - UI компоненты
-│   ├── ui/               - Базовые компоненты
-│   └── products/         - Product-specific компоненты
-├── lib/                   - Утилиты и конфигурация
-│   ├── store/            - Redux store и slices
-│   └── api/              - API функции
-└── types/                 - TypeScript определения
+
+── app/                    - Next.js App Router
+
+──── products/          - Страницы продуктов
+
+──── page.tsx           - Главная страница
+
+── components/            - UI компоненты
+
+──── ui/               - Базовые компоненты
+
+──── products/         - Product-specific компоненты
+
+── lib/                   - Утилиты и конфигурация
+
+──── store/            - Redux store и slices
+
+──── api/              - API функции
+
+── types/                 - TypeScript определения
 
 ## 🔧 Установка и запуск
 bash
