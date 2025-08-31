@@ -10,8 +10,8 @@ const nextConfig: NextConfig = {
         ignoreDuringBuilds: true,
     },
 
-    basePath: '/alfa-test',
-    assetPrefix: '/alfa-test/',
+    //basePath: '/alfa-test',
+    //assetPrefix: '/alfa-test/',
 
     webpack(config) {
         config.module.rules.push({
