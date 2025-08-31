@@ -1,8 +1,12 @@
 import type { NextConfig } from 'next'
 
+const isProd = process.env.NODE_ENV === 'production'
+
+const repoBase = 'alfa-test'
+
 const nextConfig: NextConfig = {
     output: 'export',
-    trailingSlash: false,
+    trailingSlash: true,
     images: {
         unoptimized: true,
     },
@@ -10,10 +14,11 @@ const nextConfig: NextConfig = {
         ignoreDuringBuilds: true,
     },
 
-    skipTrailingSlashRedirect: true,
+    // Чтобы ссылки работали в подпути /repoBase
+    basePath: isProd ? `/${repoBase}` : '',
 
-    //basePath: '/alfa-test',
-    //assetPrefix: '/alfa-test/',
+    // Чтобы пути к /_next/*, CSS/JS указывались с префиксом repoBase
+    assetPrefix: isProd ? `/${repoBase}/` : undefined,
 
     webpack(config) {
         config.module.rules.push({

@@ -8,7 +8,7 @@
         "start": "next start",
         "lint": "eslint",
         "export": "next build && next export",
-        "deploy": "npm run export && gh-pages -d out"
+        "deploy": "npm run export && gh-pages -d out --nojekyll"
     },
     "dependencies": {
         "@reduxjs/toolkit": "^2.8.2",
