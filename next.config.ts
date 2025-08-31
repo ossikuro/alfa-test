@@ -2,7 +2,7 @@ import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
     output: 'export',
-    //trailingSlash: true,
+    trailingSlash: false,
     images: {
         unoptimized: true,
     },
@@ -10,7 +10,6 @@ const nextConfig: NextConfig = {
         ignoreDuringBuilds: true,
     },
 
-    assetPrefix: process.env.NODE_ENV === 'production' ? '/alfa-test/' : '',
     skipTrailingSlashRedirect: true,
 
     //basePath: '/alfa-test',
