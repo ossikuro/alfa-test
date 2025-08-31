@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
     },
 
     assetPrefix: process.env.NODE_ENV === 'production' ? '/alfa-test/' : '',
+    skipTrailingSlashRedirect: true,
 
     //basePath: '/alfa-test',
     //assetPrefix: '/alfa-test/',
