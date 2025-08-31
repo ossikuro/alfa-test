@@ -10,6 +10,8 @@ const nextConfig: NextConfig = {
         ignoreDuringBuilds: true,
     },
 
+    assetPrefix: process.env.NODE_ENV === 'production' ? '/alfa-test/' : '',
+
     //basePath: '/alfa-test',
     //assetPrefix: '/alfa-test/',
 
