@@ -2,7 +2,7 @@ import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
     output: 'export',
-    trailingSlash: true,
+    //trailingSlash: true,
     images: {
         unoptimized: true,
     },
@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
         ignoreDuringBuilds: true,
     },
 
-    basePath: '/alfa-test',
+    //basePath: '/alfa-test',
     //assetPrefix: '/alfa-test/',
 
     webpack(config) {
